@@ -1,11 +1,9 @@
 import express from "express";
-const app = express();
 import mongoose from "mongoose";
-import cors from "cors";
+import { router } from "./routes/posts.js";
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
-import { router } from "./routes/posts.js";
 //router
 app.get("/", (req, res) => { });
 app.use("/posts", router);

@@ -1,14 +1,12 @@
 import express, { Express, Request, Response } from "express";
-const app: Express = express();
 import mongoose from "mongoose";
-import cors from "cors";
-import bodyParser from "body-parser";
+
+import { router } from "./routes/posts.js";
+
+const app: Express = express();
 
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
-
-import { router } from "./routes/posts.js";
 
 //router
 app.get("/", (req: Request, res: Response) => {});
