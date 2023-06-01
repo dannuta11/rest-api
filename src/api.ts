@@ -6,7 +6,6 @@ import { router } from "./routes/posts.js";
 const app: Express = express();
 
 app.use(express.json());
-app.use(express.urlencoded());
 
 //router
 app.get("/", (req: Request, res: Response) => {
