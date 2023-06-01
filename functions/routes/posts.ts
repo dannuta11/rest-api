@@ -1,9 +1,9 @@
 import express, { Express, Router, Request, Response } from "express";
 import { Posts } from "../models/Posts.js";
 
-export const router: Router = express.Router();
+export const postRouter: Router = express.Router();
 
-router.get("/", async (req: Request, res: Response) => {
+postRouter.get("/", async (req: Request, res: Response) => {
   try {
     const posts = await Posts.find();
     res.json(posts);
@@ -12,7 +12,7 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/", async (req: Request, res: Response) => {
+postRouter.post("/", async (req: Request, res: Response) => {
   const post = new Posts({
     title: req.body.title,
     description: req.body.description,
@@ -32,19 +32,15 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/:id", async (req: Request, res: Response) => {
+postRouter.get("/:id", async (req: Request, res: Response) => {
   const post = await Posts.findById(req.params.id);
   res.json(post);
 });
 
-router.get("/author", (req: Request, res: Response) => {
-  //const name = req.body.name;
-  // const prenume = req.body.prenume;
-
-  res.json({
-    name: `dan`,
-    prenume: `nuta`,
-  });
+postRouter.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    await Posts.deleteOne({ _id: req.params.id });
+  } catch (e) {
+    res.json({ message: e });
+  }
 });
-
-router.delete("/:id", (req: Request, res: Response) => {});

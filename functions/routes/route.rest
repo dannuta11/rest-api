@@ -1,1 +1,1 @@
-GET http://localhost:8000/posts
+GET https://leafy-parfait-dd1dba.netlify.app/.netlify/functions/api/author
