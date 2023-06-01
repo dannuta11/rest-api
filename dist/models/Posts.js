@@ -1,5 +1,8 @@
-import { Schema, model } from "mongoose";
-const PostSchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Posts = void 0;
+const mongoose_1 = require("mongoose");
+const PostSchema = new mongoose_1.Schema({
     title: { type: String, required: true },
     description: { type: String },
     date: { type: String },
@@ -9,5 +12,4 @@ const PostSchema = new Schema({
     },
     img: { type: String, required: true },
 });
-export const Posts = model("Posts", PostSchema);
-//# sourceMappingURL=Posts.js.map
+exports.Posts = (0, mongoose_1.model)("Posts", PostSchema);

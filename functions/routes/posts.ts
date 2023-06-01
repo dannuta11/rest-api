@@ -32,6 +32,19 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/:id", (req: Request, res: Response) => {});
+router.get("/:id", async (req: Request, res: Response) => {
+  const post = await Posts.findById(req.params.id);
+  res.json(post);
+});
+
+router.get("/author", (req: Request, res: Response) => {
+  //const name = req.body.name;
+  // const prenume = req.body.prenume;
+
+  res.json({
+    name: `dan`,
+    prenume: `nuta`,
+  });
+});
 
 router.delete("/:id", (req: Request, res: Response) => {});
