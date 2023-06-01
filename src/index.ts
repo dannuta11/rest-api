@@ -22,4 +22,4 @@ mongoose.connect(
 );
 
 //listen
-app.listen(8000, () => console.log("aplicatia sa pornit cu succes"));
+app.listen(4000, () => console.log("aplicatia sa pornit cu succes"));
