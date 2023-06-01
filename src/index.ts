@@ -9,7 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 //router
-app.get("/", (req: Request, res: Response) => {});
+app.get("/", (req: Request, res: Response) => {
+  res.send("Home page");
+});
 
 app.use("/posts", router);
 
