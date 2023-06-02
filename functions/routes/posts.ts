@@ -4,11 +4,20 @@ import { Posts } from "../models/Posts.js";
 export const postRouter: Router = express.Router();
 
 postRouter.get("/", async (req: Request, res: Response) => {
-  try {
-    const posts = await Posts.find();
-    res.json(posts);
-  } catch (e) {
-    res.json({ message: e });
+  const query = req.query.blogs;
+
+  if (query) {
+    const dataSearch = await Posts.find({
+      title: { $regex: "^" + query, $options: "i" },
+    });
+    res.json(dataSearch);
+  } else {
+    try {
+      const posts = await Posts.find();
+      res.json(posts);
+    } catch (e) {
+      res.json({ message: e });
+    }
   }
 });
 
@@ -33,8 +42,12 @@ postRouter.post("/", async (req: Request, res: Response) => {
 });
 
 postRouter.get("/:id", async (req: Request, res: Response) => {
-  const post = await Posts.findById(req.params.id);
-  res.json(post);
+  try {
+    const post = await Posts.findById(req.params.id);
+    res.json(post);
+  } catch (e) {
+    res.json({ message: e });
+  }
 });
 
 postRouter.delete("/:id", async (req: Request, res: Response) => {

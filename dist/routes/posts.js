@@ -17,12 +17,21 @@ const express_1 = __importDefault(require("express"));
 const Posts_js_1 = require("../models/Posts.js");
 exports.postRouter = express_1.default.Router();
 exports.postRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const posts = yield Posts_js_1.Posts.find();
-        res.json(posts);
+    const query = req.query.blogs;
+    if (query) {
+        const dataSearch = yield Posts_js_1.Posts.find({
+            title: { $regex: "^" + query, $options: "i" },
+        });
+        res.json(dataSearch);
     }
-    catch (e) {
-        res.json({ message: e });
+    else {
+        try {
+            const posts = yield Posts_js_1.Posts.find();
+            res.json(posts);
+        }
+        catch (e) {
+            res.json({ message: e });
+        }
     }
 }));
 exports.postRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -45,8 +54,13 @@ exports.postRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 }));
 exports.postRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const post = yield Posts_js_1.Posts.findById(req.params.id);
-    res.json(post);
+    try {
+        const post = yield Posts_js_1.Posts.findById(req.params.id);
+        res.json(post);
+    }
+    catch (e) {
+        res.json({ message: e });
+    }
 }));
 exports.postRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
