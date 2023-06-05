@@ -52,7 +52,7 @@ contactRouter.post("/", async (req: Request, res: Response) => {
   </table>
 `;
     const info = await transport.sendMail({
-      from: `${contact.email}`,
+      from: `dany.condurari@gmail.com`,
       to: "dany.condurari@gmail.com",
       subject: "Nou contact",
       html: html,

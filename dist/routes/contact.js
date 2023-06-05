@@ -61,7 +61,7 @@ exports.contactRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, 
   </table>
 `;
         const info = yield transport.sendMail({
-            from: `${contact.email}`,
+            from: `dany.condurari@gmail.com`,
             to: "dany.condurari@gmail.com",
             subject: "Nou contact",
             html: html,
