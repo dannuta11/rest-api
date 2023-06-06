@@ -4,7 +4,6 @@ import serverless from "serverless-http";
 import cors from "cors";
 
 import { postRouter } from "./routes/posts.js";
-import { authorRouter } from "./routes/author.js";
 import { contactRouter } from "./routes/contact.js";
 
 mongoose.connect(
@@ -17,7 +16,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/.netlify/functions/api/posts", postRouter);
-app.use("/.netlify/functions/api/author", authorRouter);
 app.use("/.netlify/functions/api/contact", contactRouter);
 
 app.listen(4000, () => console.log("app is open on port 4000"));
