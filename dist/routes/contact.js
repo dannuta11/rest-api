@@ -24,13 +24,13 @@ const transport = nodemailer_1.default.createTransport({
     service: "gmail",
     auth: {
         user: "dany.condurari@gmail.com",
-        pass: "duuzvugjbcogoetx",
+        pass: `duuzvugjbcogoetx`,
     },
 });
 exports.contactRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const contactForm = new Contact_1.ContactModel({
-        name: req.body.nume,
-        prenume: req.body.prenume,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         tel: req.body.tel,
         message: req.body.message,
@@ -41,18 +41,18 @@ exports.contactRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, 
   <table style="border: 1px solid black; width: 50%;">
   <thead style="font-weight: bold">
     <tr>
-     <td style="border: 1px solid black">Nume</td>
-     <td style="border: 1px solid black">Prenume</td>
+     <td style="border: 1px solid black">First Name</td>
+     <td style="border: 1px solid black">Last Name</td>
      <td style="border: 1px solid black">Email</td>
-     <td style="border: 1px solid black">Telefon</td>
-     <td style="border: 1px solid black">Messaj</td>
+     <td style="border: 1px solid black">Phone</td>
+     <td style="border: 1px solid black">Message</td>
     </tr>
   </thead>
 
   <tbody>
   <tr>
-   <td style="border: 1px solid black">${contact.name}</td>
-   <td style="border: 1px solid black">${contact.prenume}</td>
+   <td style="border: 1px solid black">${contact.firstName}</td>
+   <td style="border: 1px solid black">${contact.lastName}</td>
    <td style="border: 1px solid black">${contact.email}</td>
    <td style="border: 1px solid black">${contact.tel}</td>
    <td style="border: 1px solid black">${contact.message}</td>

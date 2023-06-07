@@ -27,8 +27,8 @@ postRouter.post("/", async (req: Request, res: Response) => {
     description: req.body.description,
     img: req.body.img,
     author: {
-      name: req.body.author.name,
-      prenume: req.body.author.prenume,
+      firstName: req.body.author.firstName,
+      lastName: req.body.author.lastName,
     },
     date: req.body.date,
   });

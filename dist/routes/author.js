@@ -18,14 +18,11 @@ const Posts_js_1 = require("../models/Posts.js");
 exports.authorRouter = express_1.default.Router();
 exports.authorRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const nume = req.body.name;
-        const prenume = req.body.prenume;
-        const allBlogs = yield Posts_js_1.Posts.find({
-            author: {
-                name: `${nume}`,
-            },
-        });
-        res.json(allBlogs);
+        const authorFilter = yield Posts_js_1.Posts.find();
+        if (!authorFilter) {
+            res.status(404).json("error: Not found");
+        }
+        res.json(authorFilter);
     }
     catch (e) {
         res.json({ message: e });
