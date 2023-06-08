@@ -66,9 +66,19 @@ exports.contactRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, 
             subject: "Nou contact",
             html: html,
         });
-        res.send(info);
+        if (info) {
+            res.json("totul este ok");
+        }
+        else {
+            const errorInfoMail = info;
+            res.status(500).json({ message: errorInfoMail.response });
+        }
     }
     catch (e) {
-        res.json({ message: e });
+        if (typeof e === "object" && e !== null) {
+            const errorInfoMail = e.toString();
+            res.json({ message: errorInfoMail });
+        }
+        res.json("A aparut o erroare neasteptata");
     }
 }));

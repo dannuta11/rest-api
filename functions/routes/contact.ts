@@ -5,6 +5,13 @@ import { ContactModel } from "../models/Contact";
 
 export const contactRouter = express.Router();
 
+interface InfoProps {
+  response: string;
+  code: string;
+  responseCode: number;
+  command: string;
+}
+
 const transport = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -57,8 +64,19 @@ contactRouter.post("/", async (req: Request, res: Response) => {
       subject: "Nou contact",
       html: html,
     });
-    res.send(info);
+
+    if (info) {
+      res.json("totul este ok");
+    } else {
+      const errorInfoMail: InfoProps = info;
+      res.status(500).json({ message: errorInfoMail.response });
+    }
   } catch (e) {
-    res.json({ message: e });
+    if (typeof e === "object" && e !== null) {
+      const errorInfoMail = e.toString();
+      res.json({ message: errorInfoMail });
+    }
+
+    res.json("A aparut o erroare neasteptata");
   }
 });
