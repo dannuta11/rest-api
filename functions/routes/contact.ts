@@ -1,7 +1,7 @@
-import express, { Request, Response, Router } from "express";
+import express, { Request, Response } from "express";
 import nodemailer from "nodemailer";
 
-import { ContactModel } from "../models/Contact";
+import { ContactModel } from "../models";
 
 export const contactRouter = express.Router();
 

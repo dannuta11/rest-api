@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.contactRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const Contact_1 = require("../models/Contact");
+const models_1 = require("../models");
 exports.contactRouter = express_1.default.Router();
 const transport = nodemailer_1.default.createTransport({
     host: "smtp.gmail.com",
@@ -28,7 +28,7 @@ const transport = nodemailer_1.default.createTransport({
     },
 });
 exports.contactRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const contactForm = new Contact_1.ContactModel({
+    const contactForm = new models_1.ContactModel({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,

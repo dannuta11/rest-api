@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "start": "nodemon dist/api.js",
+    "start": "npx tsc --watch & nodemon dist/api.js",
     "build": "netlify deploy --prod tsc",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/api.js\""
   },
   "author": "",
   "license": "ISC",

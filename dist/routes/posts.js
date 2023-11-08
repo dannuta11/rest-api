@@ -14,19 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postRouter = void 0;
 const express_1 = __importDefault(require("express"));
-const Posts_js_1 = require("../models/Posts.js");
+const models_1 = require("../models");
 exports.postRouter = express_1.default.Router();
 exports.postRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const query = req.query.blogs;
     if (query) {
-        const dataSearch = yield Posts_js_1.Posts.find({
+        const dataSearch = yield models_1.Posts.find({
             title: { $regex: "^" + query, $options: "i" },
         });
         res.json(dataSearch);
     }
     else {
         try {
-            const posts = yield Posts_js_1.Posts.find();
+            const posts = yield models_1.Posts.find();
             res.json(posts);
         }
         catch (e) {
@@ -35,13 +35,13 @@ exports.postRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 }));
 exports.postRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const post = new Posts_js_1.Posts({
+    const post = new models_1.Posts({
         title: req.body.title,
         description: req.body.description,
         img: req.body.img,
         author: {
-            firstName: req.body.author.firstName,
-            lastName: req.body.author.lastName,
+            name: req.body.author.name,
+            prenume: req.body.author.prenume,
         },
         date: req.body.date,
     });
@@ -55,7 +55,7 @@ exports.postRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, fun
 }));
 exports.postRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const post = yield Posts_js_1.Posts.findById(req.params.id);
+        const post = yield models_1.Posts.findById(req.params.id);
         res.json(post);
     }
     catch (e) {
@@ -63,10 +63,12 @@ exports.postRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, f
     }
 }));
 exports.postRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
     try {
-        yield Posts_js_1.Posts.deleteOne({ _id: req.params.id });
+        const deleteResult = yield models_1.Posts.deleteOne({ _id: id });
+        res.json(deleteResult);
     }
     catch (e) {
-        res.json({ message: e });
+        res.json("error");
     }
 }));

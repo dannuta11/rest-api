@@ -1,5 +1,5 @@
-import express, { Express, Router, Request, Response } from "express";
-import { Posts } from "../models/Posts.js";
+import express, { Router, Request, Response } from "express";
+import { Posts } from "../models";
 
 export const postRouter: Router = express.Router();
 
@@ -27,8 +27,8 @@ postRouter.post("/", async (req: Request, res: Response) => {
     description: req.body.description,
     img: req.body.img,
     author: {
-      firstName: req.body.author.firstName,
-      lastName: req.body.author.lastName,
+      name: req.body.author.name,
+      prenume: req.body.author.prenume,
     },
     date: req.body.date,
   });
@@ -50,10 +50,26 @@ postRouter.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
-postRouter.delete("/:id", async (req: Request, res: Response) => {
+postRouter.put("/:id", async (req: Request, res: Response) => {
+  const editedBlog = req.body;
   try {
-    await Posts.deleteOne({ _id: req.params.id });
+    const post = await Posts.updateOne(
+      { _id: editedBlog._id },
+      { ...editedBlog }
+    );
+    res.json(post);
   } catch (e) {
     res.json({ message: e });
+  }
+});
+
+postRouter.delete("/:id", async (req: Request, res: Response) => {
+  const id = req.params.id;
+  try {
+    const deleteResult = await Posts.deleteOne({ _id: id });
+
+    res.json(deleteResult);
+  } catch (e) {
+    res.json("error");
   }
 });
