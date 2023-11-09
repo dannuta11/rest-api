@@ -8,6 +8,7 @@ interface PostsProp {
   author: {
     name: string;
     prenume: string;
+    id: string;
   };
   date: string;
 }
@@ -19,6 +20,7 @@ const PostSchema = new Schema<PostsProp>({
   author: {
     name: { type: String },
     prenume: { type: String },
+    id: { type: String },
   },
   img: { type: String, required: true },
 });

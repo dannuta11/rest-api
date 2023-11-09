@@ -9,6 +9,7 @@ const PostSchema = new mongoose_1.Schema({
     author: {
         name: { type: String },
         prenume: { type: String },
+        id: { type: String },
     },
     img: { type: String, required: true },
 });

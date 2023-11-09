@@ -9,6 +9,5 @@ const UsersSchema = new mongoose_1.Schema({
     gender: { type: String, required: true },
     password: { type: String, required: true },
     rol: { type: String, required: true },
-    id: { type: Number, required: true },
 });
 exports.UsersModel = (0, mongoose_1.model)("Users", UsersSchema);

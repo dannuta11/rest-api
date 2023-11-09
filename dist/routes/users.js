@@ -24,7 +24,6 @@ exports.usersRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, fu
         gender: req.body.gender,
         password: req.body.password,
         rol: req.body.rol,
-        id: req.body._id,
     });
     try {
         const saveUser = yield post.save();
@@ -37,7 +36,7 @@ exports.usersRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, fu
 exports.usersRouter.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
     try {
-        const users = yield models_1.UsersModel.updateOne({ _id: data.id }, Object.assign({}, data));
+        const users = yield models_1.UsersModel.updateOne({ _id: data._id }, Object.assign({}, data));
         res.json(users);
     }
     catch (e) {
@@ -57,7 +56,7 @@ exports.usersRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, 
     const id = req.params.id;
     try {
         const user = yield models_1.UsersModel.findById(id);
-        res.json(req.body);
+        res.json(user);
     }
     catch (e) {
         res.json({ message: e });
@@ -65,7 +64,9 @@ exports.usersRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, 
 }));
 exports.usersRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const responseDeleteUser = yield models_1.UsersModel.deleteOne({ _id: req.params.id });
+        const responseDeleteUser = yield models_1.UsersModel.deleteOne({
+            _id: req.params.id,
+        });
         res.json(responseDeleteUser);
     }
     catch (e) {

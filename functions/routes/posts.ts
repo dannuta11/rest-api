@@ -29,6 +29,7 @@ postRouter.post("/", async (req: Request, res: Response) => {
     author: {
       name: req.body.author.name,
       prenume: req.body.author.prenume,
+      id: req.body.author.id,
     },
     date: req.body.date,
   });

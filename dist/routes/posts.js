@@ -42,6 +42,7 @@ exports.postRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, fun
         author: {
             name: req.body.author.name,
             prenume: req.body.author.prenume,
+            id: req.body.author.id,
         },
         date: req.body.date,
     });
@@ -56,6 +57,16 @@ exports.postRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, fun
 exports.postRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const post = yield models_1.Posts.findById(req.params.id);
+        res.json(post);
+    }
+    catch (e) {
+        res.json({ message: e });
+    }
+}));
+exports.postRouter.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const editedBlog = req.body;
+    try {
+        const post = yield models_1.Posts.updateOne({ _id: editedBlog._id }, Object.assign({}, editedBlog));
         res.json(post);
     }
     catch (e) {
