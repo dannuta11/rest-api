@@ -1,5 +1,4 @@
 import express, { Express } from "express";
-import mongoose from "mongoose";
 import serverless from "serverless-http";
 import cors from "cors";
 
@@ -11,6 +10,7 @@ import {
   loginRouter,
   index,
 } from "./routes";
+import { PORT } from "./config";
 
 connectToDatabase();
 
@@ -25,5 +25,5 @@ app.use("/.netlify/functions/api/users", usersRouter);
 app.use("/.netlify/functions/api/login", loginRouter);
 app.use("/.netlify/functions/api/", index);
 
-app.listen(3000, () => console.log(`app is open on port 3000`));
+app.listen(PORT, () => console.log(`app is open on port ${PORT}`));
 export const handler = serverless(app);
